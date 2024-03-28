@@ -24,9 +24,8 @@
                     var apiKey = 'X7LXEACWVMI5TYRYE1WHB07R';
                     $.ajax({
                         url: 'https://api.quant-aq.com/v1/data/resampled/?sn=MOD-PM-00991&start_date=2024-02-26&end_date=2024-02-27&period=8h',
-                        dataType: "jsonp",
                         headers: {
-                            "Authorization": "Basic " + btoa(apiKey + ":" )
+                            "Authorization": "Basic " + btoa(apiKey + ":" + apiKey)
                         },
                     }).done(function (jsonData) {
                         data.addRows([
