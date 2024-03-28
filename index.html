@@ -1,7 +1,47 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            callback: function () {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Date Time');
+                data.addColumn('number', 'PM2.5');
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                var options = {
+                    title: 'Temperature Data',
+                    curveType: 'none',
+                    legend: { position: 'bottom' }
+                };
+
+                drawChart();
+                setInterval(drawChart, 10000);
+
+                function drawChart() {
+                    var apiKey = 'X7LXEACWVMI5TYRYE1WHB07R';
+                    $.ajax({
+                        url: 'https://api.quant-aq.com/v1/data/resampled/?sn=MOD-PM-00991&start_date=2024-02-26&end_date=2024-02-27&period=8h',
+                        dataType: "jsonp",
+                        headers: {
+                            "Authorization": "Basic " + btoa(apiKey + ":" )
+                        },
+                    }).done(function (jsonData) {
+                        data.addRows([
+                            [jsonData.period_end, jsonData.pm25]
+                        ]);
+                        chart.draw(data, options);
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
+                    });
+                }
+            },
+            packages: ['corechart']
+        });
+    </script>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<div id="chart_div"></div>
 </body>
 </html>
