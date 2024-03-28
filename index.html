@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -25,7 +24,7 @@
                     var apiKey = 'X7LXEACWVMI5TYRYE1WHB07R';
                     $.ajax({
                         url: 'https://api.quant-aq.com/v1/data/resampled/?sn=MOD-PM-00991&start_date=2024-02-26&end_date=2024-02-27&period=8h',
-                        dataType: "json",
+                        dataType: "jsonp",
                         headers: {
                             "Authorization": "Basic " + btoa(apiKey + ":" )
                         },
@@ -45,7 +44,7 @@
 </head>
 <body>
 <h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages. Check 4</p>
+<p>I'm hosted with GitHub Pages. Check 5</p>
 <div id="chart_div"></div>
 </body>
 </html>
