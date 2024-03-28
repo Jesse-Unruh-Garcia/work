@@ -24,7 +24,7 @@
                     var apiKey = 'X7LXEACWVMI5TYRYE1WHB07R';
                     $.ajax({
                         url: 'https://api.quant-aq.com/v1/data/resampled/?sn=MOD-PM-00991&start_date=2024-02-26&end_date=2024-02-27&period=8h',
-                        dataType: "jsonp",
+                        dataType: "json",
                         headers: {
                             "Authorization": "Basic " + btoa(apiKey + ":" )
                         },
@@ -44,7 +44,7 @@
 </head>
 <body>
 <h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages. Check 2</p>
+<p>I'm hosted with GitHub Pages. Check 3</p>
 <div id="chart_div"></div>
 </body>
 </html>
