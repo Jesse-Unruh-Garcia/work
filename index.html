@@ -1,60 +1,7 @@
+<!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
-    <?php headers.append('Access-Control-Allow-Origin', '*');
-headers.append('Access-Control-Allow-Credentials', 'true');?>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            callback: function () {
-                var data = new google.visualization.DataTable();
-                var draw = 0;
-                data.addColumn('string', 'Date Time');
-                data.addColumn('number', 'PM2.5');
-                data.addColumn('number', 'PM10');
-                data.addColumn('number', 'PM1');
-                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-                var options = {
-                    title: 'Temperature Data',
-                    curveType: 'none',
-                    legend: { position: 'bottom' }
-                };
-
-                drawChart();
-                setInterval(drawChart, 10000);
-
-                function drawChart() {
-                    var apiKey = 'X7LXEACWVMI5TYRYE1WHB07R';
-                    $.ajax({
-                        url: 'https://api.quant-aq.com/v1/data/resampled/?sn=MOD-PM-00991&start_date=2024-02-26&end_date=2024-02-27&period=1h',
-                        dataType: "json",
-                        headers: {
-                            "Authorization": "Basic " + btoa(apiKey + ":" )
-                        },
-                    }).done(function (jsonData) {
-                        if(draw<1) {
-                            for (var i = 0; i < 48; i++) {
-                                data.addRows([
-                                    [jsonData.data[i].period_end, jsonData.data[i].pm25, jsonData.data[i].pm10, jsonData.data[i].pm1]
-                                ]);
-                            }
-                            console.log(jsonData.length)
-                            chart.draw(data, options);
-                            draw = 1;
-                        }
-                    }).fail(function (jqXHR, textStatus, errorThrown) {
-                        console.log(textStatus, errorThrown);
-                    });
-                }
-            },
-            packages: ['corechart']
-        });
-    </script>
-</head>
 <body>
 <h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages. Check 5</p>
-<div id="chart_div"></div>
+<p>I'm hosted with GitHub Pages.</p>
 </body>
 </html>
